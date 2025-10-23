@@ -1,0 +1,29 @@
+header {
+    background-color: rgb(44, 116, 250);
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 18px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.logo {
+    text-decoration: none;
+    font-size: 2rem;
+    padding-left: 10px;
+}
+
+.nav-links li {
+    list-style-type: none;
+    font-size: 1rem;
+    padding: 10px 10px 10px 0px;
+}
+
+a {
+    text-decoration: none;
+    color: whitesmoke;
+}
