@@ -1,34 +1,30 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Account from "./pages/Account";
+import QuizGeneration from "./pages/QuizGeneration";
+import QuizQuestions from "./pages/QuizQuestions";
+import Results from "./pages/Results";
+import Layout from "./components/Layout";
 
+//because I made a Layout component, we don't need to add Header and Footer component
+function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/quiz" element={<QuizGeneration />} />
+          <Route path="/quiz/run" element={<QuizQuestions />} />
+          <Route path="/results" element={<Results />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   )
 }
 
