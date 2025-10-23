@@ -1,0 +1,30 @@
+footer {
+    background-color: rgb(44, 116, 250);
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 18px;
+}
+
+.footer-description {
+    width: 35%;
+    color: whitesmoke;
+    font-size: 1.2rem;
+}
+
+.nav-section {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.nav-section-title {
+    color: whitesmoke;
+}
+
+.footer-nav-links li {
+    list-style-type: none;
+    font-size: 1rem;
+    padding: 5px 0px;
+}
+
