@@ -11,7 +11,7 @@ import QuizQuestions from "./pages/QuizQuestions";
 import Results from "./pages/Results";
 import Layout from "./components/Layout";
 
-//because I made a Layout component, we don't need to add Header and Footer component
+//because I made a Layout component, we don't need to add Header and Footer component (me thinks?) -JL
 function App() {
   return (
     <BrowserRouter>

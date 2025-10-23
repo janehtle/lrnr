@@ -1,12 +1,13 @@
-//server folder will be for Node + Express
-//fulfill requirement for refactoring code to Node.js
-//already installed npm: express, cors, dotenv
+/* server folder will be for Node + Express
+fulfill requirement for refactoring code to Node.js
+already installed npm: express, cors, dotenv -JL */
+
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-//test app - run node server.js in terminal to check if it runs
-//update: it works/runs!
+/* test app - run node server.js in terminal to check if it runs
+update: it works/runs! may need second pair of eyes to confirm -JL */
 const app = express();
 app.use(cors());
 app.use(express.json());
