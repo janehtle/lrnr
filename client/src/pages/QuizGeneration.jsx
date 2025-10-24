@@ -20,7 +20,7 @@ export default function QuizGeneration() {
             setError("All fields are required")
         } else {
             setError("")
-            console.log(`submitting ${userChoices}`)
+            console.log(userChoices)
             async function postResponse(input) {
                 try {
                     const response = await fetch('http://localhost:4000/api/quiz', {
@@ -30,10 +30,11 @@ export default function QuizGeneration() {
                         },
                         body: JSON.stringify(input),
                     });
+                    let data = await response.json()
+                    console.log("success:", data)
                     if (!response.ok) {
                         throw new Error(`error status: ${response.status}`);
                     }
-
 
                 } catch (error) {
                     console.error('Error:', error);
