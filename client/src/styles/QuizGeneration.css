@@ -64,7 +64,14 @@ option {
     font-size: 14px;
 }
 
+#required-message {
+    display: block;
+    margin-top: 20px;
+    color: red;
+}
+
 .submit-btn {
+    cursor: pointer;
     margin-top: 20px;
     font-size: 18px;
     padding: 10px 15px 10px;
