@@ -1,4 +1,5 @@
 import "../styles/Home.css";
+import { useNavigate } from "react-router-dom";
 import turtleImg from "../assets/lrnr_turtle.png";
 import boltImg from "../assets/bolt_icon.svg";
 import moneyImg from "../assets/money_icon.svg";
@@ -6,12 +7,18 @@ import personImg from "../assets/person_icon.svg";
 
 
 export default function Home() {
+    const navigate = useNavigate();
+
+    function handleClick() {
+        navigate("/account"); //lead to account. acting as if account creation feature included to "start" their journey by signing up
+    }
+
     return (
         <div className="homepage-section">
             <div className="main-content">
                 <img src={turtleImg} className="turtle-logo" alt="blue image of a turtle and lrnr logo" />
                 <p className="homepage-headline">Your guided path to programming enlightment</p>
-                <button className="begin-journey-btn">BEGIN JOURNEY</button>
+                <button className="begin-journey-btn" onClick={handleClick}>BEGIN JOURNEY</button>
             </div>
 
             <div className="subcontent">
