@@ -1,39 +1,163 @@
 .account-section {
     height: 100vh;
     margin: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1400px;
+    margin-inline: auto;
 }
 
 .page-title {
     color: teal;
     font-size: 4rem;
+    margin-bottom: 3rem;
+    align-self: flex-start;
+    text-align: left;
 }
 
 .account-content {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
+    gap: 3rem;
+    justify-items: center;
 }
 
 .account-subcontent {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    width: 30rem;
+    width: 28rem;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+    padding: 1.5rem;
 }
 
 .account-subcontent img {
     height: 4rem;
+    width: auto;
 }
 
 .account-subcontent h3 {
     margin: 0 auto;
     font-size: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .account-subcontent p {
     margin: 0 auto;
     font-size: 1.5rem;
 }
+
+
+
+/* ----- Tablet (<1200px and >800px) ----- */
+@media (max-width: 1200px) and (min-width: 800px) {
+    .account-section {
+        margin: 3rem;
+        height: auto;
+    }
+
+    .page-title {
+        font-size: 3.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .account-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+    }
+
+    .account-subcontent {
+        width: 24rem;
+        padding: 1.2rem;
+    }
+
+    .account-subcontent img {
+        height: 3.5rem;
+    }
+
+    .account-subcontent h3 {
+        font-size: 1.6rem;
+    }
+
+    .account-subcontent p {
+        font-size: 1.1rem;
+    }
+}
+
+
+
+/* ----- Mobile (<800px) ----- */
+@media (max-width: 800px) {
+    .account-section {
+        margin: 2rem 1rem;
+        height: auto;
+    }
+
+    .page-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .account-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .account-subcontent {
+        width: 100%;
+        max-width: 22rem;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .account-subcontent img {
+        height: 3rem;
+    }
+
+    .account-subcontent h3 {
+        font-size: 1.3rem;
+    }
+
+    .account-subcontent p {
+        font-size: 1rem;
+    }
+}
+
+/* ----- Desktop (>1600px) ----- */
+@media (min-width: 1600px) {
+    .account-section {
+        max-width: 1600px;
+        margin: 6rem auto;
+    }
+
+    .page-title {
+        font-size: 4.5rem;
+    }
+
+    .account-content {
+        gap: 4rem;
+    }
+
+    .account-subcontent {
+        width: 32rem;
+        padding: 2rem;
+    }
+
+    .account-subcontent h3 {
+        font-size: 2.2rem;
+    }
+
+    .account-subcontent p {
+        font-size: 1.3rem;
+    }
+}
+
 
 
 

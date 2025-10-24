@@ -1,17 +1,25 @@
 .homepage-section {
-    height: 100vh;
     margin: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1400px;
+    margin-inline: auto;
 }
 
 .main-content {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    align-items: center;
+    text-align: center;
 }
 
 .main-content p {
     margin: 0 auto;
     font-size: 1.5rem;
+    max-width: 800px;
+
 }
 
 .begin-journey-btn {
@@ -26,9 +34,11 @@
 }
 
 .turtle-logo {
-    width: 30rem;
-    height: 13rem;
+    /* width: 30rem; */
+    /* height: 13rem; */
     margin: 0 auto;
+    max-width: 100%;
+    height: auto;
 
 }
 
@@ -37,17 +47,22 @@
     grid-template-columns: 1fr 1fr 1fr;
     margin-top: 5rem;
     gap: 3rem;
+    justify-items: center;
 }
 
 .subcontent-divs {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    width: 30rem;
+    width: 28rem;
+    align-items: center;
+    max-width: 100%;
+    padding: 1rem;
 }
 
 .subcontent-divs img {
     height: 4rem;
+    width: auto;
 }
 
 .subcontent-divs h3{
@@ -58,4 +73,123 @@
 .subcontent-divs p {
     font-size: 1.2em;
     line-height: 1.6;
+}
+
+
+
+/* ----- Tablet (<1200px and >800px) ----- */
+@media (max-width: 1200px) and (min-width: 800px) {
+    .homepage-section {
+        margin: 3rem;
+    }
+
+    .turtle-logo {
+        width: 24rem;
+    }
+
+    .main-content p {
+        font-size: 1.3rem;
+    }
+
+    .subcontent {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .subcontent-divs {
+        width: 24rem;
+    }
+
+    .subcontent-divs h3 {
+        font-size: 1.3rem;
+    }
+
+    .subcontent-divs p {
+        font-size: 1rem;
+    }
+}
+
+/* ----- Mobile (<800px) ----- */
+@media (max-width: 800px) {
+    .homepage-section {
+        margin: 2rem 1rem;
+        height: auto;
+    }
+
+    .main-content {
+        gap: 1.5rem;
+    }
+
+    .turtle-logo {
+        width: 100%;
+        max-width: 24rem;
+    }
+
+    .main-content p {
+        font-size: 1.2rem;
+        padding: 0 1rem;
+    }
+
+    .begin-journey-btn {
+        width: 100%;
+        max-width: 300px;
+        font-size: 1rem;
+    }
+
+    .subcontent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 3rem;
+        gap: 2rem;
+    }
+
+    .subcontent-divs {
+        width: 100%;
+        max-width: 22rem;
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+
+    .subcontent-divs img {
+        height: 3rem;
+    }
+
+    .subcontent-divs h3 {
+        font-size: 1.2rem;
+    }
+
+    .subcontent-divs p {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+}
+
+/* ----- Desktop (>1600px) ----- */
+@media (min-width: 1600px) {
+    .homepage-section {
+        max-width: 1600px;
+        margin: 6rem auto;
+    }
+
+    .turtle-logo {
+        width: 34rem;
+    }
+
+    .main-content p {
+        font-size: 1.7rem;
+    }
+
+    .subcontent-divs {
+        width: 32rem;
+    }
+
+    .subcontent-divs h3 {
+        font-size: 1.6rem;
+    }
+
+    .subcontent-divs p {
+        font-size: 1.2rem;
+        max-width: 80%;
+    }
 }
