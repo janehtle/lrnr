@@ -1,0 +1,41 @@
+.account-section {
+    height: 100vh;
+    margin: 5rem;
+}
+
+.page-title {
+    color: teal;
+    font-size: 4rem;
+}
+
+.account-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 5rem;
+}
+
+.account-subcontent {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 30rem;
+}
+
+.account-subcontent img {
+    height: 4rem;
+}
+
+.account-subcontent h3 {
+    margin: 0 auto;
+    font-size: 2rem;
+}
+
+.account-subcontent p {
+    margin: 0 auto;
+    font-size: 1.5rem;
+}
+
+
+
+
+
