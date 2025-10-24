@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.main-body {
+    padding: 60px;
+    font-family: Arial, sans-serif;
+}
+
+.main-body .heading {
+    font-size: 45px;
+    font-weight: 300;
+}
+
+.subheading {
+    padding-top: 35px;
+}
+
+.main-body form {
+    margin-top: 50px;
+}
+
+label {
+    margin-top: 30px;
+    display: block;
+    color: gray;
+    padding-bottom: 20px;
+
+}
+
+.select-wrapper {
+    display: flex;
+}
+
+.main-body select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='0,0 10,0 5,6' fill='%23000'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    border: 0;
+    border: none;
+    padding-top: 12px;
+    padding-bottom: 8px;
+    width: 85%;
+    border-bottom: 1.5px solid rgb(145, 144, 144);
+}
+
+select:focus {
+    outline: none;
+    border-color: rgb(41, 183, 164);
+}
+
+option {
+
+    background-color: #fff;
+    color: #333;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    font-size: 18px;
+    padding: 10px 15px 10px;
+    border-radius: 2px;
+    border: none;
+    background-color: rgb(41, 183, 164);
+    color: white;
+}
