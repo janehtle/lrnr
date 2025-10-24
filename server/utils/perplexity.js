@@ -36,8 +36,46 @@ const fetchQuestions = async (topic, expertise, num, style) => {
 
     return questions;
   } catch (err) {
-    console.log('Failed to fetch from Perplexity:', err);
+    console.log('Failed to fetch questions from Perplexity:', err);
   }
 };
 
-module.exports = fetchQuestions;
+const validateAnswer = async (style, question, answer) => {
+  try {
+    const completion = await client.chat.completions.create({
+      model: 'sonar',
+      messages: [
+        {
+          role: 'system',
+          content: `You are ${style}. Write your responses in the style of ${style} and use the tone that fits the style`,
+        },
+        {
+          role: 'user',
+          content: `Check if ${answer} is the correct answer to ${question}. Reply with JSON { validity: "Incorrect" OR "Correct", explanation: "..." }. Maintain the tone of ${style} in your explanation.`,
+        },
+      ],
+      response_format: {
+        type: 'json_schema',
+        json_schema: {
+          schema: {
+            type: 'object',
+            properties: {
+              validity: { type: 'string' },
+              explanation: { type: 'string' },
+            },
+            required: ['validity', 'explanation'],
+          },
+        },
+      },
+    });
+
+    const response = JSON.parse(completion.choices[0].message.content);
+    console.log(response);
+
+    return response;
+  } catch (err) {
+    console.log('Failed to fetch answer validation from Perplexity:', err);
+  }
+};
+
+module.exports = { fetchQuestions, validateAnswer };
