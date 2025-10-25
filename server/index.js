@@ -15,15 +15,15 @@ app.use(express.json());
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
 const questions = [];
-const topic = '';
-const expertise = '';
-const num = '';
-const style = '';
+let topic = '';
+let expertise = '';
+let num = '';
+let style = '';
 //placeholder route
 app.post('/api/quiz', async (req, res) => {
   // Placeholder user input configs
-  topic = 'javascript';
-  expertise = 'novice';
+  topic = 'jquery';
+  expertise = 'intermediate';
   num = '5';
   style = 'master oogway';
 
