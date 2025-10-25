@@ -1,0 +1,25 @@
+{
+  "name": "lrnr",
+  "version": "1.0.0",
+  "description": "The LRNR app uses the Perplexity API to generate custom quizzes based on user input. Originally built using jQuery and Go, this project is a full refactor into a Node.js and React stack.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run preview --prefix client\" \"npm run start --prefix server\"",
+    "dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janehtle/lrnr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/janehtle/lrnr/issues"
+  },
+  "homepage": "https://github.com/janehtle/lrnr#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

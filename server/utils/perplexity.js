@@ -31,10 +31,11 @@ const fetchQuestions = async (topic, expertise, num, style) => {
       },
     });
 
-    const questions = JSON.parse(completion.choices[0].message.content);
-    console.log(questions);
+    const generatedQuestions = JSON.parse(
+      completion.choices[0].message.content
+    );
 
-    return questions;
+    return generatedQuestions.questions;
   } catch (err) {
     console.log('Failed to fetch questions from Perplexity:', err);
   }

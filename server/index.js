@@ -22,10 +22,15 @@ let style = '';
 //placeholder route
 app.post('/api/quiz', async (req, res) => {
   // Placeholder user input configs
-  topic = 'jquery';
-  expertise = 'intermediate';
-  num = '5';
-  style = 'master oogway';
+  //   topic = 'jquery';
+  //   expertise = 'intermediate';
+  //   num = '5';
+  //   style = 'master oogway';
+
+  topic = req.body.topic;
+  expertise = req.body.expertise;
+  num = req.body.num;
+  style = req.body.style;
 
   if (!topic && !expertise && !num && !style)
     res.json({
@@ -34,8 +39,9 @@ app.post('/api/quiz', async (req, res) => {
     });
 
   try {
-    questions = await fetchQuestions(topic, expertise, num, style);
-    res.json({ questions });
+    const questions = await fetchQuestions(topic, expertise, num, style);
+    console.log(questions);
+    res.json(questions);
   } catch (err) {
     res.json({ error: 'Failed to run fetchQuestions' });
   }
