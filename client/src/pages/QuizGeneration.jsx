@@ -11,6 +11,7 @@ export default function QuizGeneration() {
   const [questions, setQuestions] = useState([])
   const [qIndex, setqIndex] = useState(0)
   const answerRef = useRef("")
+  const answers = []
   function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -44,21 +45,47 @@ export default function QuizGeneration() {
           console.error('Error:', error);
         }
       }
-      setQuestions(["question 1 something something", "question 2 something something"])
+      async function getQuestions() {
+        const response = await fetch('http://localhost:4000/api/answer')
+        let data = await response.json()
+        const fetchedQuestions = data.questions
+        setQuestions(fetchedQuestions)
+      }
       postResponse({ topic, expertise, num, style });
       setVisibleBlock([false, true])
       setTimeout(function () { setQuizVisible(true), setLogoVisible(false) }, 5000);
+      getQuestions()
     }
   }
 
   function handleAnswerSubmit(e) {
     e.preventDefault()
+    setqIndex(+1)
+    answers.push(answerRef.current.value)
+    const answerData = JSON.stringify({ answers })
+    async function postAnswers(answerData) {
+      try {
+        const response = await fetch('http://localhost:4000/api/answer', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: answerData,
+        });
+        let data = await response.json();
+        console.log('success:', data);
+        if (!response.ok) {
+          throw new Error(`error status: ${response.status}`);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
     if (qIndex === (questions.length - 1)) {
       console.log("complete")
-      return "complete"
+      postAnswers(answerData)
     }
-    setqIndex(+1)
-    answerRef.current.value = ""
+
   }
   return (
     <div className="main-body">
@@ -116,13 +143,13 @@ export default function QuizGeneration() {
       <div className="generatedQuiz" style={{ display: visibleBlock[1] ? "block" : "none" }}>
         <img id="thinking-logo" alt="thinking logo" src={logo} style={{ display: logoVisible ? "block" : "none" }}></img>
         <div style={{ display: quizVisible ? "block" : "none" }}>
-          <h1>{qIndex + 1} of {questions.length}</h1>
+          <h1 className="qCounter">{qIndex + 1} of {questions.length}</h1>
           <h1>Question</h1>
-          <p>{questions[qIndex]}</p>
+          <p className="subheading">{questions[qIndex]}</p>
           <form>
-            <h1>Your Answer</h1>
+            <h1 className="your-answer">Your Answer</h1>
             <label htmlFor="answer">Answer</label>
-            <input ref={answerRef} id="answer" type="text"></input>
+            <input name={`answer${qIndex}`} ref={answerRef} id="answer" type="text"></input>
             <button onClick={handleAnswerSubmit} className="submit-btn" type="submit">SUBMIT ANSWER</button>
           </form>
         </div>

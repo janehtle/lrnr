@@ -22,9 +22,14 @@
     font-family: Arial, sans-serif;
 }
 
-.main-body .heading {
+.generatedQuiz h1 {
     font-size: 45px;
     font-weight: 300;
+    color: rgb(36, 168, 150);
+}
+
+.your-answer {
+    margin-top: 20vh;
 }
 
 .subheading {
@@ -71,30 +76,15 @@
     border-color: rgb(41, 183, 164);
 }
 
-.quizGenForm option {
-
-    background-color: #fff;
-    color: #333;
-    padding: 5px;
-    font-size: 14px;
+.main-body .heading {
+    font-size: 45px;
+    font-weight: 300;
 }
 
-#required-message {
-    display: block;
-    margin-top: 20px;
-    color: red;
+.subheading {
+    padding-top: 35px;
 }
 
-.submit-btn {
-    cursor: pointer;
-    margin-top: 20px;
-    font-size: 18px;
-    padding: 10px 15px 10px;
-    border-radius: 2px;
-    border: none;
-    background-color: rgb(41, 183, 164);
-    color: white;
-}
 
 .generatedQuiz {
     min-height: 80vh;
@@ -153,6 +143,13 @@
     margin: auto;
     margin-top: 30vh;
     animation: pulse 1s infinite
+}
+
+.qCounter {
+    display: block;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 50px;
 }
 
 @media screen and (max-width: 500px) {
