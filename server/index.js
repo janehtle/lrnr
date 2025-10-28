@@ -14,6 +14,8 @@ app.use(cors());
 app.use(express.json());
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
+let score = 0;
+
 let topic = '';
 let expertise = '';
 let num = '';
@@ -26,10 +28,9 @@ app.post('/api/quiz', async (req, res) => {
   style = req.body.style;
 
   if (!topic && !expertise && !num && !style)
-    res.json({
-      error:
-        'No topic, expertise, number of questions, and style of questions selected',
-    });
+    console.log(
+      'No topic, expertise, number of questions, and style of questions selected'
+    );
 
   try {
     const questions = await fetchQuestions(topic, expertise, num, style);
@@ -43,6 +44,7 @@ app.post('/api/quiz', async (req, res) => {
 app.post('/api/answer', async (req, res) => {
   const answer = req.body.answer;
   const question = req.body.question;
+  console.log(req.body);
   if (!answer) {
     res.json({ error: 'No answer submitted' });
   }
@@ -52,6 +54,7 @@ app.post('/api/answer', async (req, res) => {
 
   try {
     const response = await validateAnswer(style, question, answer);
+    console.log(response);
     res.json(response);
   } catch (err) {
     res.json({ error: 'Failed to run validateAnswer' });
