@@ -1,6 +1,6 @@
 import '../styles/QuizGeneration.css';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import logo from '../assets/thinking.png';
 
 export default function QuizGeneration() {
@@ -11,7 +11,7 @@ export default function QuizGeneration() {
   const [questions, setQuestions] = useState([]);
   const [qIndex, setqIndex] = useState(0);
   const answerRef = useRef('');
-  const answers = [];
+  const [answers, setAnswers] = useState([]);
   function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -76,13 +76,14 @@ export default function QuizGeneration() {
 
   function handleAnswerSubmit(e) {
     e.preventDefault();
-    setqIndex((prevCount) => prevCount + 1);
-    console.log(answers);
-    answers.push(answerRef.current.value);
-
+    const newAnswer = answerRef.current.value;
+    const updatedAnswers = [...answers, newAnswer];
+    setAnswers(updatedAnswers);
+    setqIndex(prev => prev + 1);
+    console.log(updatedAnswers)
     if (qIndex === questions.length - 1) {
       console.log('complete');
-      postAnswers(answers);
+      postAnswers(updatedAnswers);
     }
   }
 
