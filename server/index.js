@@ -14,19 +14,12 @@ app.use(cors());
 app.use(express.json());
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
-const questions = [];
 let topic = '';
 let expertise = '';
 let num = '';
 let style = '';
-//placeholder route
-app.post('/api/quiz', async (req, res) => {
-  // Placeholder user input configs
-  //   topic = 'jquery';
-  //   expertise = 'intermediate';
-  //   num = '5';
-  //   style = 'master oogway';
 
+app.post('/api/quiz', async (req, res) => {
   topic = req.body.topic;
   expertise = req.body.expertise;
   num = req.body.num;
@@ -48,12 +41,13 @@ app.post('/api/quiz', async (req, res) => {
 });
 
 app.post('/api/answer', async (req, res) => {
-  // QUESTION: Should frontend devs POST the fetched question OR should I just get it from above? If I get it from the questions variable, would I have to make it into a global variable? How would I ensure I get the correct question in the array?
-  const question = questions[0];
-  const answer = 'Javascript is lit, but JQuery is even more lit';
-
+  const answer = req.body.answer;
+  const question = req.body.question;
   if (!answer) {
     res.json({ error: 'No answer submitted' });
+  }
+  if (!question) {
+    res.json({ error: 'Provided the question the answer is submitted for' });
   }
 
   try {
