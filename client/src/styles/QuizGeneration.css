@@ -3,25 +3,44 @@
     padding: 0;
 }
 
-.main-body {
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.quizGenForm {
     padding: 60px;
     font-family: Arial, sans-serif;
 }
 
-.main-body .heading {
+.generatedQuiz h1 {
     font-size: 45px;
     font-weight: 300;
+    color: rgb(36, 168, 150);
+}
+
+.your-answer {
+    margin-top: 20vh;
 }
 
 .subheading {
     padding-top: 35px;
 }
 
-.main-body form {
+.quizGenForm form {
     margin-top: 50px;
 }
 
-label {
+.quizGenForm label {
     margin-top: 30px;
     display: block;
     color: gray;
@@ -33,7 +52,8 @@ label {
     display: flex;
 }
 
-.main-body select {
+.quizGenForm select {
+    cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -51,23 +71,55 @@ label {
     border-bottom: 1.5px solid rgb(145, 144, 144);
 }
 
-select:focus {
+.quizGenForm select:focus {
     outline: none;
     border-color: rgb(41, 183, 164);
 }
 
-option {
-
-    background-color: #fff;
-    color: #333;
-    padding: 5px;
-    font-size: 14px;
+.main-body .heading {
+    font-size: 45px;
+    font-weight: 300;
 }
 
-#required-message {
+.subheading {
+    padding-top: 35px;
+}
+
+
+.generatedQuiz {
+    min-height: 80vh;
+    padding: 60px;
+    font-family: Arial, sans-serif;
+}
+
+
+.generatedQuiz form {
+    margin-top: 50px;
+}
+
+.generatedQuiz label {
+    margin-top: 30px;
     display: block;
-    margin-top: 20px;
-    color: red;
+    color: rgb(41, 183, 164);
+    padding-bottom: 20px;
+
+}
+
+.generatedQuiz input {
+    cursor: pointer;
+    font-size: 22px;
+    display: block;
+    width: 100%;
+    border: 0;
+    border: none;
+    padding-bottom: 8px;
+    width: 85%;
+    border-bottom: 1.5px solid rgb(145, 144, 144);
+}
+
+.generatedQuiz input:focus {
+    outline: none;
+    border-color: rgb(41, 183, 164);
 }
 
 .submit-btn {
@@ -79,4 +131,40 @@ option {
     border: none;
     background-color: rgb(41, 183, 164);
     color: white;
+}
+
+
+
+#thinking-logo {
+    width: 15vw;
+    height: auto;
+    min-width: 150px;
+    display: block;
+    margin: auto;
+    margin-top: 30vh;
+    animation: pulse 1s infinite
+}
+
+.qCounter {
+    display: block;
+    width: fit-content;
+    margin: auto;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 500px) {
+
+    .quizGenForm,
+    .generatedQuiz {
+        padding: 20px;
+        font-family: Arial, sans-serif;
+    }
+
+    .quizGenForm .heading {
+        font-size: 30px;
+    }
+
+    .quizGenForm select {
+        width: 100%;
+    }
 }
