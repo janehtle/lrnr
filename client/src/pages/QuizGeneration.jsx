@@ -5,13 +5,13 @@ import logo from '../assets/thinking.png';
 
 export default function QuizGeneration() {
   const [error, setError] = useState('');
-  const [visibleBlock, setVisibleBlock] = useState([true, false])
-  const [logoVisible, setLogoVisible] = useState(true)
-  const [quizVisible, setQuizVisible] = useState(false)
-  const [questions, setQuestions] = useState([])
-  const [qIndex, setqIndex] = useState(0)
-  const answerRef = useRef("")
-  const answers = []
+  const [visibleBlock, setVisibleBlock] = useState([true, false]);
+  const [logoVisible, setLogoVisible] = useState(true);
+  const [quizVisible, setQuizVisible] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [qIndex, setqIndex] = useState(0);
+  const answerRef = useRef('');
+  const answers = [];
   function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -36,69 +36,72 @@ export default function QuizGeneration() {
             },
             body: JSON.stringify(input),
           });
-          let data = await response.json();
-          console.log('success:', data);
           if (!response.ok) {
             throw new Error(`error status: ${response.status}`);
           }
+          let data = await response.json();
+          console.log('success:', data);
+          setQuestions(data);
         } catch (error) {
           console.error('Error:', error);
         }
       }
-      async function getQuestions() {
-        const response = await fetch('http://localhost:4000/api/answer')
-        let data = await response.json()
-        const fetchedQuestions = data.questions
-        setQuestions(fetchedQuestions)
-      }
       postResponse({ topic, expertise, num, style });
-      setVisibleBlock([false, true])
-      setTimeout(function () { setQuizVisible(true), setLogoVisible(false) }, 5000);
-      getQuestions()
+      setVisibleBlock([false, true]);
+      setTimeout(function () {
+        setQuizVisible(true), setLogoVisible(false);
+      }, 5000);
+    }
+  }
+
+  async function postAnswers(answerData) {
+    console.log(answerData);
+    try {
+      const response = await fetch('http://localhost:4000/api/answer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ answerData }),
+      });
+      let data = await response.json();
+      console.log('success:', data);
+      if (!response.ok) {
+        throw new Error(`error status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   }
 
   function handleAnswerSubmit(e) {
-    e.preventDefault()
-    setqIndex(+1)
-    answers.push(answerRef.current.value)
-    const answerData = JSON.stringify({ answers })
-    async function postAnswers(answerData) {
-      try {
-        const response = await fetch('http://localhost:4000/api/answer', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: answerData,
-        });
-        let data = await response.json();
-        console.log('success:', data);
-        if (!response.ok) {
-          throw new Error(`error status: ${response.status}`);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
-    if (qIndex === (questions.length - 1)) {
-      console.log("complete")
-      postAnswers(answerData)
-    }
+    e.preventDefault();
+    setqIndex((prevCount) => prevCount + 1);
+    console.log(answers);
+    answers.push(answerRef.current.value);
 
+    if (qIndex === questions.length - 1) {
+      console.log('complete');
+      postAnswers(answers);
+    }
   }
+
   return (
     <div className="main-body">
-      <div className="quizGenForm" style={{ display: visibleBlock[0] ? "block" : "none" }}>
+      <div
+        className="quizGenForm"
+        style={{ display: visibleBlock[0] ? 'block' : 'none' }}
+      >
         <h1 className="heading">Quiz Generation Options</h1>
         <p className="subheading">
-          Please choose your preferences below to generate your personalized quiz
+          Please choose your preferences below to generate your personalized
+          quiz
         </p>
 
         <form onSubmit={handleSubmit}>
           <label htmlFor="topic-select">Topic</label>
           <select defaultValue="" name="topic" id="topic-select">
-            <option value="" disabled ></option>
+            <option value="" disabled></option>
             <option value="golang">golang</option>
             <option value="aws">aws</option>
             <option value="javascript">javascript</option>
@@ -109,24 +112,26 @@ export default function QuizGeneration() {
           </select>
           <label htmlFor="exp-select">Expertise</label>
           <select defaultValue="" name="expertise" id="exp-select">
-            <option disabled ></option>
+            <option disabled></option>
             <option value="novice">novice</option>
             <option value="intermediate">intermediate</option>
             <option value="expert">expert</option>
           </select>
           <label htmlFor="num-select">Number of Questions</label>
           <select defaultValue="" name="num" id="num-select">
-            <option disabled ></option>
+            <option disabled></option>
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="15">15</option>
           </select>
           <label htmlFor="style-select">Style of Questions</label>
           <select defaultValue="" name="style" id="style-select">
-            <option disabled ></option>
+            <option disabled></option>
             <option value="master oogway">master oogway</option>
             <option value="1940's gangster">1940's gangster</option>
-            <option value="teaching an 8 year old">like I'm an 8 year old</option>
+            <option value="teaching an 8 year old">
+              like I'm an 8 year old
+            </option>
             <option value="normal">normal</option>
             <option value="jedi">jedi</option>
             <option value="captain jack sparrow">captain jack sparrow</option>
@@ -140,17 +145,38 @@ export default function QuizGeneration() {
         </form>
       </div>
 
-      <div className="generatedQuiz" style={{ display: visibleBlock[1] ? "block" : "none" }}>
-        <img id="thinking-logo" alt="thinking logo" src={logo} style={{ display: logoVisible ? "block" : "none" }}></img>
-        <div style={{ display: quizVisible ? "block" : "none" }}>
-          <h1 className="qCounter">{qIndex + 1} of {questions.length}</h1>
+      <div
+        className="generatedQuiz"
+        style={{ display: visibleBlock[1] ? 'block' : 'none' }}
+      >
+        <img
+          id="thinking-logo"
+          alt="thinking logo"
+          src={logo}
+          style={{ display: logoVisible ? 'block' : 'none' }}
+        ></img>
+        <div style={{ display: quizVisible ? 'block' : 'none' }}>
+          <h1 className="qCounter">
+            {qIndex + 1} of {questions.length}
+          </h1>
           <h1>Question</h1>
           <p className="subheading">{questions[qIndex]}</p>
           <form>
             <h1 className="your-answer">Your Answer</h1>
             <label htmlFor="answer">Answer</label>
-            <input name={`answer${qIndex}`} ref={answerRef} id="answer" type="text"></input>
-            <button onClick={handleAnswerSubmit} className="submit-btn" type="submit">SUBMIT ANSWER</button>
+            <input
+              name={`answer${qIndex}`}
+              ref={answerRef}
+              id="answer"
+              type="text"
+            ></input>
+            <button
+              onClick={handleAnswerSubmit}
+              className="submit-btn"
+              type="submit"
+            >
+              SUBMIT ANSWER
+            </button>
           </form>
         </div>
       </div>
