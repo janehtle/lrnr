@@ -54,21 +54,24 @@ export default function QuizGeneration() {
     }
   }
 
-  async function postAnswers(answerData) {
-    console.log(answerData);
+  async function postAnswers(questionsData, answerData) {
+    const qna = questionsData.map((q, i) => ({
+      question: q,
+      answer: answerData[i],
+    }));
     try {
       const response = await fetch('http://localhost:4000/api/answer', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ answerData }),
+        body: JSON.stringify({ qna }),
       });
-      let data = await response.json();
-      console.log('success:', data);
       if (!response.ok) {
         throw new Error(`error status: ${response.status}`);
       }
+      const data = await response.json();
+      console.log('Successfully POST answers:', data);
     } catch (error) {
       console.error('Error:', error);
     }
@@ -79,11 +82,11 @@ export default function QuizGeneration() {
     const newAnswer = answerRef.current.value;
     const updatedAnswers = [...answers, newAnswer];
     setAnswers(updatedAnswers);
-    setqIndex(prev => prev + 1);
-    console.log(updatedAnswers)
+    setqIndex((prev) => prev + 1);
+    console.log(updatedAnswers);
     if (qIndex === questions.length - 1) {
       console.log('complete');
-      postAnswers(updatedAnswers);
+      postAnswers(questions, updatedAnswers);
     }
   }
 

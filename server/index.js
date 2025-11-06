@@ -14,8 +14,6 @@ app.use(cors());
 app.use(express.json());
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
-let score = 0;
-
 let topic = '';
 let expertise = '';
 let num = '';
@@ -42,20 +40,25 @@ app.post('/api/quiz', async (req, res) => {
 });
 
 app.post('/api/answer', async (req, res) => {
-  const answer = req.body.answer;
-  const question = req.body.question;
+  const qna = req.body.qna;
   console.log(req.body);
-  if (!answer) {
-    res.json({ error: 'No answer submitted' });
-  }
-  if (!question) {
-    res.json({ error: 'Provided the question the answer is submitted for' });
+  if (!qna) {
+    res.json({ error: 'No answers submitted' });
   }
 
   try {
-    const response = await validateAnswer(style, question, answer);
-    console.log(response);
-    res.json(response);
+    let score = 0;
+
+    const result = await Promise.all(
+      qna.map(async (e) => {
+        const validation = await validateAnswer(style, e.question, e.answer);
+        if (validation.validity.toLowerCase() === 'correct') score++;
+        return {
+          ...validation,
+        };
+      })
+    );
+    res.json({ score, result });
   } catch (err) {
     res.json({ error: 'Failed to run validateAnswer' });
   }
