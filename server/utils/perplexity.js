@@ -71,7 +71,6 @@ const validateAnswer = async (style, question, answer) => {
     });
 
     const response = JSON.parse(completion.choices[0].message.content);
-    console.log(response);
 
     return response;
   } catch (err) {
