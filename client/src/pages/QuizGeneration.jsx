@@ -8,8 +8,11 @@ export default function QuizGeneration() {
   const [visibleBlock, setVisibleBlock] = useState([true, false]);
   const [logoVisible, setLogoVisible] = useState(true);
   const [quizVisible, setQuizVisible] = useState(false);
+  const [resultsVisible, setResultsVisible] = useState(false)
+  const [results, setResults] = useState([])
   const [questions, setQuestions] = useState([]);
   const [qIndex, setqIndex] = useState(0);
+  const [score, setScore] = useState(null)
   const answerRef = useRef('');
   const [answers, setAnswers] = useState([]);
   function handleSubmit(e) {
@@ -47,7 +50,8 @@ export default function QuizGeneration() {
         }
       }
       postResponse({ topic, expertise, num, style });
-      setVisibleBlock([false, true]);
+      setVisibleBlock([false, true])
+      setLogoVisible(true)
       setTimeout(function () {
         setQuizVisible(true), setLogoVisible(false);
       }, 5000);
@@ -71,6 +75,9 @@ export default function QuizGeneration() {
         throw new Error(`error status: ${response.status}`);
       }
       const data = await response.json();
+      setScore(data.score)
+      setResults(data.result)
+      console.log("Score: " + score)
       console.log('Successfully POST answers:', data);
     } catch (error) {
       console.error('Error:', error);
@@ -82,12 +89,29 @@ export default function QuizGeneration() {
     const newAnswer = answerRef.current.value;
     const updatedAnswers = [...answers, newAnswer];
     setAnswers(updatedAnswers);
+    answerRef.current.value = ""
     setqIndex((prev) => prev + 1);
     console.log(updatedAnswers);
     if (qIndex === questions.length - 1) {
       console.log('complete');
       postAnswers(questions, updatedAnswers);
+      setQuizVisible(false)
+      setLogoVisible(true)
+      setTimeout(function () {
+        setResultsVisible(true), setLogoVisible(false);
+      }, 6000)
     }
+  }
+
+  useEffect(() => {
+    postAnswers(questions, answers)
+  }, [])
+
+  function handleNewQuiz() {
+    setVisibleBlock([true, false])
+    setResultsVisible(false)
+    setQuizVisible(false)
+    setqIndex(0)
   }
 
   return (
@@ -182,6 +206,23 @@ export default function QuizGeneration() {
               SUBMIT ANSWER
             </button>
           </form>
+        </div>
+      </div>
+      <div
+        className="resultsPage"
+        style={{ display: resultsVisible ? 'block' : 'none' }}
+      >
+        <h1>Your Results: {score}/{questions.length}</h1>
+        <div>
+          {results.map((result, index) => {
+            return (
+              <div key={index}>
+                <h2>Question #{index + 1}: {result.validity}</h2>
+                <p>{result.explanation}</p>
+              </div>
+            )
+          })}
+          <button onClick={handleNewQuiz}>Take Another Quiz</button>
         </div>
       </div>
     </div>

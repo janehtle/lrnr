@@ -152,6 +152,17 @@
     margin-bottom: 50px;
 }
 
+.resultsPage {
+    position: absolute;
+    top: 150px;
+}
+
+@media screen and (max-width: 800px) {
+    .resultsPage {
+        top: 200px;
+    }
+}
+
 @media screen and (max-width: 500px) {
 
     .quizGenForm,
