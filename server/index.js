@@ -10,15 +10,7 @@ const { fetchQuestions, validateAnswer } = require('./utils/perplexity');
 /* test app - run node server.js in terminal to check if it runs
 update: it works/runs! may need second pair of eyes to confirm -JL */
 const app = express();
-// app.use(cors());
-
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:4000',
-    credentials: true,
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 app.get('/api/health', (req, res) => res.json({ ok: true }));
 
