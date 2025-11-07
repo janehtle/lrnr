@@ -3,6 +3,8 @@ The LRNR app uses the Perplexity API to generate custom quizzes based on user in
 
 The goal of this project is to modernize the application, improve maintainability, and ensure responsiveness and accessibility across all devices while retaining the original app’s functionality.
 
+[Live Demo](https://lrnr-w6ck.onrender.com/)
+
 # Core Features
 Home Page
 - Static page introducing LRNR
