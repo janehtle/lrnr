@@ -52,7 +52,8 @@ const validateAnswer = async (style, question, answer) => {
         },
         {
           role: 'user',
-          content: `Check if ${answer} is the correct answer to ${question}. Reply with JSON { validity: "Incorrect" OR "Correct", explanation: "..." }. Maintain the tone of ${style} in your explanation.`,
+          content: `Check if ${answer} is the correct answer to ${question}. Reply with JSON { validity: "Incorrect" OR "Correct", explanation: "..." }. Maintain the tone of ${style} 
+          in your explanation and avoid any brackets and numbers that are not part of the explanation. Additionally, limit explanation to 3 or 4 sentences`,
         },
       ],
       response_format: {
