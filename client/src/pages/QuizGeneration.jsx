@@ -23,7 +23,7 @@ export default function QuizGeneration() {
     const form = e.target;
     const data = new FormData(form);
     const userChoices = Object.fromEntries(data.entries());
-    const backend = import.meta.env.BACKEND_URL;
+    const backend = import.meta.env.VITE_BACKEND_URL;
     let topic = userChoices.topic;
     let expertise = userChoices.expertise;
     let num = userChoices.num;
