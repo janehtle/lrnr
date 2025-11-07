@@ -18,12 +18,13 @@ export default function QuizGeneration() {
   const [valid, setValid] = useState(true)
   const answerRef = useRef('');
   const [answers, setAnswers] = useState([]);
+  const backend = import.meta.env.VITE_BACKEND_URL;
+
   function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
     const userChoices = Object.fromEntries(data.entries());
-    const backend = import.meta.env.VITE_BACKEND_URL;
     let topic = userChoices.topic;
     let expertise = userChoices.expertise;
     let num = userChoices.num;
