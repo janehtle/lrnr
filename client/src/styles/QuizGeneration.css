@@ -229,4 +229,9 @@
     .quizGenForm select {
         width: 100%;
     }
+
+    .results-summary,
+    .results-header {
+        width: 80%;
+    }
 }
