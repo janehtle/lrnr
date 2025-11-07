@@ -2,6 +2,7 @@ import '../styles/QuizGeneration.css';
 
 import React, { useState, useRef, useEffect } from 'react';
 import logo from '../assets/thinking.png';
+import restart from '../assets/restart.svg'
 
 export default function QuizGeneration() {
   const [error, setError] = useState('');
@@ -13,6 +14,7 @@ export default function QuizGeneration() {
   const [questions, setQuestions] = useState([]);
   const [qIndex, setqIndex] = useState(0);
   const [score, setScore] = useState(null)
+  const [valid, setValid] = useState(true)
   const answerRef = useRef('');
   const [answers, setAnswers] = useState([]);
   function handleSubmit(e) {
@@ -86,7 +88,12 @@ export default function QuizGeneration() {
 
   function handleAnswerSubmit(e) {
     e.preventDefault();
-    const newAnswer = answerRef.current.value;
+    const newAnswer = answerRef.current.value.trim();
+    if (!newAnswer) {
+      setValid(false)
+      return
+    }
+    setValid(true)
     const updatedAnswers = [...answers, newAnswer];
     setAnswers(updatedAnswers);
     answerRef.current.value = ""
@@ -197,6 +204,7 @@ export default function QuizGeneration() {
               ref={answerRef}
               id="answer"
               type="text"
+              style={valid ? { borderColor: "rgb(41, 183, 164)" } : { borderColor: "red" }}
             ></input>
             <button
               onClick={handleAnswerSubmit}
@@ -212,17 +220,17 @@ export default function QuizGeneration() {
         className="resultsPage"
         style={{ display: resultsVisible ? 'block' : 'none' }}
       >
-        <h1>Your Results: {score}/{questions.length}</h1>
-        <div>
+        <h1 className="results-header">Your Results: {score}/{questions.length}</h1>
+        <div className="results-summary">
           {results.map((result, index) => {
             return (
-              <div key={index}>
+              <div className="result-div" key={index}>
                 <h2>Question #{index + 1}: {result.validity}</h2>
                 <p>{result.explanation}</p>
               </div>
             )
           })}
-          <button onClick={handleNewQuiz}>Take Another Quiz</button>
+          <button className="newQuiz" onClick={handleNewQuiz}>New Quiz <img id="restart" src={restart}></img></button>
         </div>
       </div>
     </div>
