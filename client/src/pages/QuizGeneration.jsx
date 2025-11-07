@@ -1,6 +1,5 @@
 import '../styles/QuizGeneration.css';
-import 'dotenv/config';
-
+// import 'dotenv/config'; - can't use this in frontend
 
 import React, { useState, useRef, useEffect } from 'react';
 import logo from '../assets/thinking.png';
@@ -24,6 +23,7 @@ export default function QuizGeneration() {
     const form = e.target;
     const data = new FormData(form);
     const userChoices = Object.fromEntries(data.entries());
+    const backend = import.meta.env.BACKEND_URL;
     let topic = userChoices.topic;
     let expertise = userChoices.expertise;
     let num = userChoices.num;
@@ -36,7 +36,7 @@ export default function QuizGeneration() {
       console.log(userChoices);
       async function postResponse(input) {
         try {
-          const response = await fetch(`${import.meta.env.BACKEND_URL}/api/quiz`, {
+          const response = await fetch(`${backend}/api/quiz`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ export default function QuizGeneration() {
       answer: answerData[i],
     }));
     try {
-      const response = await fetch(`${import.meta.env.BACKEND_URL}/api/answer`, {
+      const response = await fetch(`${backend}/api/answer`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
