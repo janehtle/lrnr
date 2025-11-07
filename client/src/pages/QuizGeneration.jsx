@@ -1,4 +1,5 @@
 import '../styles/QuizGeneration.css';
+import 'dotenv/config';
 
 import React, { useState, useRef, useEffect } from 'react';
 import logo from '../assets/thinking.png';
@@ -34,7 +35,7 @@ export default function QuizGeneration() {
       console.log(userChoices);
       async function postResponse(input) {
         try {
-          const response = await fetch('http://localhost:4000/api/quiz', {
+          const response = await fetch(`${import.meta.env.BACKEND_URL}/api/quiz`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -66,7 +67,7 @@ export default function QuizGeneration() {
       answer: answerData[i],
     }));
     try {
-      const response = await fetch('http://localhost:4000/api/answer', {
+      const response = await fetch(`${import.meta.env.BACKEND_URL}/api/answer`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
